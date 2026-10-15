@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#a99bdd">
+<title>Papatya Koyu — Birleştir & Geliştir</title>
+<style>
+:root{--ink:#45364e;--muted:#907d91;--cream:#fffaf1;--pink:#f5a8b6;--pink-dark:#dc7e96;--mint:#c9ead6;--green:#639b77;--gold:#f6d778;--lilac:#d9c8ef;--blue:#bde2ef;--shadow:0 4px 0 rgba(69,54,78,.11);--line:rgba(255,255,255,.92)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}html{background:#ffe7d9}body{margin:0;min-height:100vh;color:var(--ink);font-family:ui-rounded,"SF Pro Rounded",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(ellipse at 10% 0%,#fff0bd 0,transparent 36%),linear-gradient(180deg,#ffe2d7 0%,#fff4df 38%,#e4f2e4 100%);overscroll-behavior-y:contain}
+button{border:0;cursor:pointer;font:inherit;color:inherit;touch-action:manipulation}button:focus-visible{outline:3px solid #ad74d5;outline-offset:2px}.app{width:min(100%,600px);margin:0 auto;padding:max(12px,env(safe-area-inset-top)) 12px max(22px,env(safe-area-inset-bottom))}
+.topline{display:flex;align-items:center;justify-content:space-between;gap:8px}.brandrow{display:flex;gap:10px;align-items:center;min-width:0}.logo{height:50px;width:50px;flex:0 0 50px;display:grid;place-items:center;border:3px solid white;border-radius:17px;background:linear-gradient(150deg,#fff0a9,#f8c8d1);box-shadow:var(--shadow);font-size:29px}.brand{font-size:clamp(22px,6vw,29px);font-weight:1000;letter-spacing:-1px;line-height:1.02}.subtitle{margin-top:5px;font-size:9px;letter-spacing:1.6px;font-weight:950;color:#a27d91}.topActions{display:flex;gap:6px}.roundBtn{width:41px;height:41px;border-radius:14px;background:#fffdf7;border:2px solid white;box-shadow:var(--shadow);font-size:19px;display:grid;place-items:center}
+.stats{display:grid;grid-template-columns:1.05fr 1.05fr .9fr;gap:7px;margin:14px 0 8px}.stat{min-width:0;position:relative;background:rgba(255,255,255,.86);border:2px solid white;border-radius:16px;padding:9px 8px 8px;text-align:center;box-shadow:0 3px 0 rgba(69,54,78,.06)}.stat .value{font-size:clamp(15px,4.1vw,19px);display:block;font-weight:1000;white-space:nowrap}.stat .label{font-size:9px;letter-spacing:.65px;color:var(--muted);font-weight:950;text-transform:uppercase;display:block;margin-top:4px}.energyLine{height:5px;background:#f3dce6;border-radius:99px;margin:6px 1px 0;overflow:hidden}.energyFill{height:100%;width:100%;background:linear-gradient(90deg,#f3a3b7,#d77a9c);border-radius:99px;transition:width .2s}
+.levelBar{display:flex;align-items:center;gap:9px;padding:0 4px;margin:4px 2px 13px}.levelLabel{font-weight:950;font-size:11px;white-space:nowrap}.xpRail{height:9px;flex:1;background:#ffffffb5;border:1px solid white;border-radius:99px;overflow:hidden}.xpFill{height:100%;width:0;background:linear-gradient(90deg,#b4e3bf,#62b28d);border-radius:99px;transition:width .3s}.xpText{font-size:10px;color:var(--muted);font-weight:850;white-space:nowrap}
+.nav{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:3px 0 13px;padding:5px;background:#e7d6e9a6;border:1px solid #ffffffba;border-radius:17px}.nav button{padding:10px 5px;border-radius:12px;background:transparent;color:#8c7892;font-size:12px;font-weight:950}.nav button.active{background:#fffdf7;color:var(--ink);box-shadow:0 3px 0 rgba(69,54,78,.09)}
+.panel{display:none}.panel.active{display:block}.sectionHead{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:9px 3px}.sectionHead h2{font-size:17px;letter-spacing:-.35px;margin:0;font-weight:1000}.tinyNote{color:var(--muted);font-size:10px;font-weight:800}
+.orders{display:grid;gap:8px;margin-bottom:14px}.order{display:flex;align-items:center;gap:10px;padding:10px;background:#fffdf8;border:2px solid white;border-radius:18px;box-shadow:var(--shadow);min-width:0}.orderArt{width:48px;height:48px;flex:0 0 48px;border-radius:15px;background:linear-gradient(145deg,#fff0b7,#fde1c8);display:grid;place-items:center;font-size:27px;position:relative}.orderArt small{position:absolute;right:-3px;bottom:-4px;background:#f1dcff;color:#73598d;border:2px solid white;border-radius:8px;padding:1px 5px;font-size:9px;font-weight:1000}.orderBody{flex:1;min-width:0}.eyebrow{font-size:9px;letter-spacing:1px;font-weight:1000;color:#ad8497;text-transform:uppercase;margin-bottom:3px}.orderTitle{font-size:12px;font-weight:1000;line-height:1.25}.orderReward{font-size:10px;color:var(--muted);font-weight:800;margin-top:4px}.deliver{align-self:center;background:var(--mint);color:#315941;border-radius:12px;padding:10px 11px;font-size:11px;font-weight:1000;box-shadow:0 3px 0 #9acdae;white-space:nowrap}.deliver:disabled{opacity:.45;filter:grayscale(.25);box-shadow:none;cursor:default}.orderProgress{height:4px;background:#f3e8ed;border-radius:9px;margin-top:6px;overflow:hidden}.orderProgress div{height:100%;background:#e89bab;border-radius:9px}
+.boardTitleRow{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:15px 3px 8px}.boardTitleRow h2{font-size:17px;margin:0;font-weight:1000}.boardTools{display:flex;align-items:center;gap:6px}.miniBtn{background:#fffdf7;border:2px solid white;border-radius:11px;padding:7px 9px;font-size:10px;font-weight:950;box-shadow:0 2px 0 rgba(69,54,78,.08)}.miniBtn.active{background:#fbd3df;border-color:#fff}.boardWrap{background:linear-gradient(145deg,#9bc9a7,#b8d9b3);border:5px solid white;border-radius:21px;padding:7px;box-shadow:0 7px 0 #8ab494;position:relative}.board{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:5px}.cell{position:relative;aspect-ratio:1;min-width:0;overflow:hidden;border-radius:11px;background:#ffffff45;border:1px solid #ffffff72;display:flex;align-items:center;justify-content:center;flex-direction:column;user-select:none;padding:1px}.cell.filled{background:linear-gradient(150deg,#fffdf7,#fff2d9);border:2px solid #fff;box-shadow:0 3px 0 rgba(59,78,66,.14)}.cell.item-garden{background:linear-gradient(145deg,#fffdf0,#dff1d7)}.cell.item-bakery{background:linear-gradient(145deg,#fffdf1,#f8e2c5)}.cell.item-coffee{background:linear-gradient(145deg,#fff8eb,#e7d0be)}.cell.item-sea{background:linear-gradient(145deg,#f6ffff,#c9e8f0)}.cell.item-fruit{background:linear-gradient(145deg,#fff8e9,#f9d9cb)}.cell.selected{outline:3px solid #ed7797;outline-offset:-1px;transform:scale(.96);z-index:2}.cell .emoji{font-size:clamp(19px,5.5vw,30px);line-height:1;filter:drop-shadow(0 2px 0 #45364e12)}.cell .itemName{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:clamp(6px,1.8vw,9px);line-height:1.1;font-weight:950;color:#725e78;margin-top:3px;padding:0 1px}.levelTag{font-size:8px;font-weight:1000;line-height:1;background:#eadbfa;color:#775f91;border-radius:6px;padding:2px 4px;margin-top:2px}.emptyPlus{font-size:17px;color:#ffffff9c;font-weight:800}.producerIcon{font-size:clamp(23px,6.3vw,33px);line-height:1;filter:drop-shadow(0 2px 0 #60414e12)}.producerBadge{position:absolute;top:1px;right:1px;font-size:clamp(9px,2.6vw,13px);background:#fff;border-radius:6px;padding:1px 2px;box-shadow:0 1px 0 #60414e17}.producerTag{background:#fbd9ac;color:#815b40;font-size:7px;font-weight:1000;line-height:1;border-radius:5px;padding:2px 3px;margin-top:3px;letter-spacing:.1px}.chargeDots{display:flex;gap:2px;position:absolute;bottom:3px;left:4px;right:4px;justify-content:center}.chargeDots i{height:3px;flex:1;max-width:7px;border-radius:8px;background:#6ebc8b}.chargeDots i.off{background:#e6d3cf}.cell.producerEmpty{opacity:.55}.boardBottom{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:11px 3px 0}.boardBottom p{font-size:10px;color:#8d7d8b;line-height:1.4;font-weight:750;margin:0}.produceNow{padding:10px 12px;border-radius:13px;background:#ee91a7;color:white;font-size:11px;font-weight:1000;box-shadow:0 3px 0 #c8728b;white-space:nowrap}.produceNow:disabled{opacity:.5;box-shadow:none}
+.notice{display:flex;gap:8px;align-items:center;background:#fffdf3;border:1px solid white;border-radius:14px;padding:10px 11px;margin:13px 0;color:#8d778e;font-size:10px;line-height:1.4;font-weight:800}.notice strong{color:#635066}.bottomTools{display:flex;gap:8px;margin-top:12px}.toolBtn{flex:1;padding:11px 9px;border-radius:14px;background:#ffffffdc;border:2px solid #fff;font-size:11px;font-weight:950;box-shadow:0 3px 0 rgba(69,54,78,.07)}.toolBtn.gift{background:#ffe4a2;color:#71551d}.saveLine{font-size:10px;color:#887e8f;display:flex;align-items:center;justify-content:center;gap:6px;padding:14px 0 2px;font-weight:800}.saveDot{width:7px;height:7px;border-radius:99px;background:#74be8c;box-shadow:0 0 0 3px #74be8c26}.saveDot.warn{background:#e4a347;box-shadow:0 0 0 3px #e4a3472a}
+.townHero{background:linear-gradient(160deg,#b8dfbe,#e5f2c8);border:4px solid white;border-radius:23px;padding:16px 12px 14px;box-shadow:0 6px 0 #94c39e;text-align:center;overflow:hidden;position:relative}.townHero:before,.townHero:after{content:'☁️';position:absolute;opacity:.65;font-size:25px}.townHero:before{left:12px;top:11px}.townHero:after{right:15px;top:18px}.townScene{display:flex;align-items:end;justify-content:center;gap:clamp(4px,2.5vw,16px);min-height:140px;padding-top:20px}.townItem{font-size:clamp(42px,13vw,64px);filter:drop-shadow(0 5px 1px #557c4c27);animation:bob 3.5s ease-in-out infinite}.townItem:nth-child(2){font-size:clamp(59px,17vw,85px);animation-delay:.3s}.townItem:nth-child(3){animation-delay:.6s}.townCaption{font-size:11px;color:#527b5a;font-weight:950;margin-top:5px}.buildingGrid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:12px}.building{background:#fffdf8;border:2px solid white;border-radius:18px;padding:13px 11px;box-shadow:var(--shadow)}.buildingIcon{font-size:32px}.buildingName{font-size:12px;font-weight:1000;margin-top:6px}.buildingLevel{font-size:10px;color:var(--muted);font-weight:850;margin-top:3px}.upgrade{width:100%;padding:10px;border-radius:11px;background:#ccebd4;color:#315b40;font-size:10px;font-weight:1000;margin-top:10px}.upgrade:disabled{opacity:.45}.collectionGrid{display:grid;gap:10px}.chainCard{background:#fffdf8;border:2px solid white;border-radius:17px;padding:12px;box-shadow:var(--shadow)}.chainHeader{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:1000;margin-bottom:10px}.chainEmojis{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:3px}.chainSlot{aspect-ratio:1;background:#f4ecec;border-radius:9px;display:grid;place-items:center;font-size:clamp(16px,4.8vw,25px);position:relative}.chainSlot.unlocked{background:linear-gradient(145deg,#fff3c1,#dcefd7)}.chainSlot small{position:absolute;bottom:1px;right:2px;font-size:7px;font-weight:1000;color:#846e85}.settingsGroup{background:#fffdf8;border:2px solid white;border-radius:18px;padding:14px;margin-bottom:10px;box-shadow:var(--shadow)}.settingsTitle{font-size:13px;font-weight:1000;margin-bottom:5px}.settingsDesc{font-size:11px;line-height:1.45;color:var(--muted);font-weight:750;margin-bottom:12px}.settingsActions{display:flex;gap:8px;flex-wrap:wrap}.settingBtn{padding:10px 11px;border-radius:12px;background:#dcefe0;font-size:11px;font-weight:1000}.settingBtn.alt{background:#f9e6ba}.settingBtn.danger{background:#f8d9dc;color:#8a3e57}#importInput{display:none}
+.toast{position:fixed;z-index:30;bottom:calc(18px + env(safe-area-inset-bottom));left:50%;transform:translate(-50%,18px);max-width:92vw;opacity:0;pointer-events:none;background:#49364e;color:white;padding:12px 15px;border-radius:15px;font-size:12px;font-weight:900;box-shadow:0 8px 25px #49364e30;transition:opacity .2s,transform .2s;text-align:center}.toast.show{opacity:1;transform:translate(-50%,0)}.modalBack{position:fixed;inset:0;z-index:20;background:#45364e70;display:none;align-items:end;justify-content:center;padding:12px}.modalBack.show{display:flex}.modal{width:min(100%,520px);background:#fffaf2;border:3px solid white;border-radius:24px;padding:18px;box-shadow:0 12px 35px #45364e30;margin-bottom:env(safe-area-inset-bottom)}.modalHead{display:flex;justify-content:space-between;align-items:center;gap:10px}.modalHead h2{margin:0;font-size:19px}.closeBtn{height:34px;width:34px;background:#f3e6ef;border-radius:11px;font-size:17px}.modal p{font-size:12px;line-height:1.55;color:var(--muted);font-weight:750}.modal .settingBtn{width:100%;margin-top:7px;padding:13px}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@media(min-width:520px){.board{gap:7px}.cell{border-radius:14px}.cell .emoji,.producerIcon{font-size:33px}.app{padding-left:18px;padding-right:18px}.orders{grid-template-columns:1fr}.order{padding:12px}.boardWrap{padding:9px}.cell .itemName{font-size:9px}}
+@media(max-width:370px){.app{padding-left:8px;padding-right:8px}.boardWrap{padding:5px;border-width:4px}.board{gap:3px}.cell{border-radius:8px}.stats{gap:5px}.stat{padding:8px 4px}.orders{gap:6px}.order{gap:7px;padding:8px}.orderArt{width:41px;height:41px;flex-basis:41px}.deliver{padding:9px 8px;font-size:10px}.topActions{gap:4px}.roundBtn{height:37px;width:37px}}
+
+/* Papatya Koyu — renkli lavanta, şeftali ve deniz köpüğü teması */
+:root{
+  --ink:#3f3159;--muted:#756486;--cream:#fff0d8;--pink:#ff9eb8;--pink-dark:#d95f8a;
+  --mint:#a8ead9;--green:#3f927b;--gold:#ffd36f;--lilac:#c9b8ff;--blue:#9bdcf0;
+  --shadow:0 4px 0 rgba(68,48,105,.18);--line:rgba(236,224,255,.9)
+}
+html{background:#aaa0df}
+body{
+  background:
+    radial-gradient(ellipse at 5% 7%,#ffe2a4 0,transparent 28%),
+    radial-gradient(ellipse at 100% 22%,#f7b4d3 0,transparent 32%),
+    radial-gradient(ellipse at 3% 75%,#a7e8d7 0,transparent 34%),
+    linear-gradient(155deg,#b5a8eb 0%,#e5c3ef 34%,#f8cbd5 62%,#a9e2df 100%);
+  background-attachment:fixed
+}
+.logo{background:linear-gradient(145deg,#ffe17a,#ff9fba 56%,#c2a9ff);border-color:#f9e5ff;box-shadow:0 4px 0 #8c70c6}
+.subtitle{color:#65538c}
+.roundBtn{background:linear-gradient(145deg,#f3e1ff,#d9cbff);border-color:#f5eaff;box-shadow:0 4px 0 #a997d7}
+.stat{background:linear-gradient(145deg,#fff0f4,#f7d9e9);border-color:#ffedf5;box-shadow:0 4px 0 rgba(121,77,132,.16)}
+.stat:nth-child(2){background:linear-gradient(145deg,#e0fff1,#b9ecdf);border-color:#e5fff7}
+.stat:nth-child(3){background:linear-gradient(145deg,#fff5c9,#ffe2a6);border-color:#fff1c0}
+.stat .label{color:#77618e}
+.energyLine{background:#e4b4d0}
+.energyFill{background:linear-gradient(90deg,#ffb05f,#f26f9d,#b58df2)}
+.xpRail{background:#a99bd9;border-color:#d8cbff}
+.xpFill{background:linear-gradient(90deg,#ffe07b,#ff9cb9,#77d9c3)}
+.xpText{color:#675580}
+.nav{background:linear-gradient(110deg,#8d7cc6,#a88dd2);border-color:#d9c7f5;box-shadow:0 4px 0 rgba(83,58,128,.16)}
+.nav button{color:#f8f0ff}
+.nav button.active{background:linear-gradient(145deg,#fff1b8,#ffd9a4);color:#4d3b69;box-shadow:0 3px 0 #d6a9a8}
+.sectionHead h2,.boardTitleRow h2{color:#493961}
+.tinyNote{color:#665680}
+.order{background:linear-gradient(125deg,#fff0f4,#f4e7ff);border-color:#fce3f8;box-shadow:0 4px 0 rgba(108,70,129,.15)}
+.order:nth-child(2){background:linear-gradient(125deg,#e5fff4,#d0f1ed);border-color:#e1fff7}
+.order:nth-child(3){background:linear-gradient(125deg,#fff4d3,#ffe3bf);border-color:#fff0d1}
+.orderArt{background:linear-gradient(145deg,#ffdf91,#ffb8c9)}
+.order:nth-child(2) .orderArt{background:linear-gradient(145deg,#a7ebd9,#9dd8f1)}
+.order:nth-child(3) .orderArt{background:linear-gradient(145deg,#d7c3ff,#f7c4e8)}
+.orderArt small{background:#cdbbff;color:#49386c;border-color:#fff0ff}
+.eyebrow{color:#98618f}
+.orderReward{color:#6d5a81}
+.deliver{background:linear-gradient(145deg,#baf5d8,#80d9bd);color:#245e50;box-shadow:0 3px 0 #63b99d}
+.orderProgress{background:#ead5ec}
+.orderProgress div{background:linear-gradient(90deg,#ff9cba,#c29aff)}
+.miniBtn{background:linear-gradient(145deg,#fff0cb,#ffdfab);border-color:#fff2d3;box-shadow:0 3px 0 #d4a9a8}
+.miniBtn.active{background:#f8c8e1;border-color:#ffedf7}
+.boardWrap{background:linear-gradient(145deg,#49b99a,#86d6ad 58%,#7ac9d9);border-color:#d4c5ff;box-shadow:0 7px 0 #438c89}
+.cell{background:rgba(55,150,129,.38);border-color:#b9f0df}
+.cell.filled{background:linear-gradient(145deg,#efe2ff,#d8c9ff);border-color:#f0e8ff;box-shadow:0 3px 0 rgba(71,46,102,.2)}
+.cell.item-garden{background:linear-gradient(145deg,#dbffd9,#9de2b3);border-color:#eaffdf}
+.cell.item-bakery{background:linear-gradient(145deg,#fff0ae,#ffc98e);border-color:#fff3d1}
+.cell.item-coffee{background:linear-gradient(145deg,#ffe0c9,#e9b2a7);border-color:#ffe9d7}
+.cell.item-sea{background:linear-gradient(145deg,#c8f5ff,#8bd7ed);border-color:#dcfbff}
+.cell.item-fruit{background:linear-gradient(145deg,#ffd6e7,#ffadc1);border-color:#ffecf3}
+.cell.producer{background:linear-gradient(145deg,#ffd985,#ffb5bd 55%,#d2baff);border:2px solid #fff0cb;box-shadow:0 3px 0 rgba(112,69,132,.22)}
+.cell.selected{outline-color:#fff36d;box-shadow:0 0 0 2px #9b55bd inset}
+.cell .itemName{color:#49365e}
+.levelTag{background:#bdabfa;color:#433365}
+.producerBadge{background:#fff1a8;color:#5e4776;box-shadow:0 1px 0 #a681b5}
+.producerTag{background:#795cb2;color:#fff1b5}
+.chargeDots i{background:#318e78}
+.chargeDots i.off{background:#a6a1c5}
+.boardBottom p{color:#5b4f75}
+.produceNow{background:linear-gradient(145deg,#ff8daa,#e35d92);box-shadow:0 3px 0 #b94478}
+.notice{background:linear-gradient(120deg,#f4e7ff,#ffebd4);border-color:#dfcdfb;color:#68577d}
+.notice strong{color:#49345f}
+.toolBtn{background:linear-gradient(145deg,#eee3ff,#d6c8ff);border-color:#f0e7ff;box-shadow:0 3px 0 #a999d0}
+.toolBtn.gift{background:linear-gradient(145deg,#ffe994,#ffc5a0);border-color:#fff1c1;color:#714c36}
+.saveLine{color:#65547c}
+.saveDot{background:#39b98e;box-shadow:0 0 0 3px #39b98e35}
+.townHero{background:linear-gradient(145deg,#c9b9ff,#f7c3dd 49%,#a9e8d5);border-color:#f2e4ff;box-shadow:0 6px 0 #8c72bf}
+.townCaption{color:#4e4776}
+.building,.chainCard,.settingsGroup{background:linear-gradient(145deg,#f5eaff,#e6dcff);border-color:#f0e5ff;box-shadow:0 4px 0 rgba(82,57,123,.15)}
+.building:nth-child(4n+2){background:linear-gradient(145deg,#e4fff3,#c8f0e0);border-color:#eafff5}
+.building:nth-child(4n+3){background:linear-gradient(145deg,#fff1d1,#ffdfb7);border-color:#fff5e0}
+.building:nth-child(4n){background:linear-gradient(145deg,#ffe6ef,#f9cde8);border-color:#fff0f8}
+.buildingLevel,.settingsDesc{color:#6d5b82}
+.upgrade{background:linear-gradient(145deg,#a9f0d3,#6bd0b1);color:#205b4b}
+.chainSlot{background:#d8c8f2;color:#66518b}
+.chainSlot.unlocked{background:linear-gradient(145deg,#ffedaa,#aee9cf)}
+.chainSlot small{color:#655079}
+.settingBtn{background:linear-gradient(145deg,#a9f0d5,#7dd7be);color:#245a4d}
+.settingBtn.alt{background:linear-gradient(145deg,#ffe89a,#ffcba4);color:#6e4a3b}
+.settingBtn.danger{background:linear-gradient(145deg,#ffcddd,#f39bb7);color:#7e3154}
+.toast{background:linear-gradient(120deg,#493267,#714c8b);box-shadow:0 8px 25px #49326745}
+.modalBack{background:#35214f8a}
+.modal{background:linear-gradient(145deg,#f6eaff,#ffebee);border-color:#fff2ff}
+.closeBtn{background:#e4d5ff;color:#49345f}
+@media(prefers-reduced-motion:no-preference){.logo,.roundBtn,.produceNow,.deliver,.upgrade{transition:transform .15s ease,filter .15s ease}.roundBtn:active,.produceNow:active,.deliver:not(:disabled):active,.upgrade:not(:disabled):active{transform:translateY(2px);filter:saturate(1.1)}}
+
+
+
+/* Koyu tema: aynı rengârenk oyunun göz yormayan gece görünümü */
+html[data-theme="dark"]{color-scheme:dark;background:#171327;--ink:#f4edff;--muted:#c3b6d8;--shadow:0 4px 0 rgba(0,0,0,.28);--line:rgba(103,83,139,.8)}
+html[data-theme="dark"] body{color:var(--ink);background:radial-gradient(ellipse at 5% 7%,#49305e 0,transparent 30%),radial-gradient(ellipse at 100% 22%,#5a2c54 0,transparent 32%),radial-gradient(ellipse at 3% 75%,#164d51 0,transparent 34%),linear-gradient(155deg,#171327 0%,#251936 44%,#2c1d36 72%,#142d35 100%);background-attachment:fixed}
+html[data-theme="dark"] .logo{border-color:#5b477b;box-shadow:0 4px 0 #34264b}
+html[data-theme="dark"] .subtitle{color:#c7b2ed}
+html[data-theme="dark"] .roundBtn{background:linear-gradient(145deg,#51406c,#3b2e57);border-color:#685486;box-shadow:0 4px 0 #241b37}
+html[data-theme="dark"] .stat{background:linear-gradient(145deg,#412b49,#33253f);border-color:#624263;box-shadow:0 4px 0 rgba(0,0,0,.2)}
+html[data-theme="dark"] .stat:nth-child(2){background:linear-gradient(145deg,#1d4948,#203b49);border-color:#326663}
+html[data-theme="dark"] .stat:nth-child(3){background:linear-gradient(145deg,#55402e,#44333d);border-color:#79533f}
+html[data-theme="dark"] .stat .label,html[data-theme="dark"] .xpText{color:#d2c2e5}
+html[data-theme="dark"] .energyLine{background:#54344d}
+html[data-theme="dark"] .xpRail{background:#35294d;border-color:#62517d}
+html[data-theme="dark"] .nav{background:linear-gradient(110deg,#342449,#443052);border-color:#5d4676;box-shadow:0 4px 0 rgba(0,0,0,.2)}
+html[data-theme="dark"] .nav button{color:#d7c9eb}
+html[data-theme="dark"] .nav button.active{background:linear-gradient(145deg,#70527f,#604768);color:#fff5ff;box-shadow:0 3px 0 #21182e}
+html[data-theme="dark"] .sectionHead h2,html[data-theme="dark"] .boardTitleRow h2{color:#f4e8ff}
+html[data-theme="dark"] .tinyNote{color:#c0afd7}
+html[data-theme="dark"] .order{background:linear-gradient(125deg,#412b49,#352b4b);border-color:#624263;box-shadow:0 4px 0 rgba(0,0,0,.25)}
+html[data-theme="dark"] .order:nth-child(2){background:linear-gradient(125deg,#1d4546,#24394e);border-color:#326663}
+html[data-theme="dark"] .order:nth-child(3){background:linear-gradient(125deg,#4a3a2a,#493044);border-color:#74503f}
+html[data-theme="dark"] .orderArt{background:linear-gradient(145deg,#73502f,#8b3f60)}
+html[data-theme="dark"] .order:nth-child(2) .orderArt{background:linear-gradient(145deg,#276c62,#2f597b)}
+html[data-theme="dark"] .order:nth-child(3) .orderArt{background:linear-gradient(145deg,#58457e,#793c70)}
+html[data-theme="dark"] .orderArt small{background:#45345e;color:#f5e8ff;border-color:#74618b}
+html[data-theme="dark"] .eyebrow{color:#e2a9d4}
+html[data-theme="dark"] .orderReward{color:#d1c2df}
+html[data-theme="dark"] .deliver{background:linear-gradient(145deg,#5cc4a7,#31977e);color:#102f2c;box-shadow:0 3px 0 #226956}
+html[data-theme="dark"] .orderProgress{background:#44334f}
+html[data-theme="dark"] .miniBtn{background:linear-gradient(145deg,#50405e,#3b304e);border-color:#67517c;box-shadow:0 3px 0 #241a35;color:#f5eaff}
+html[data-theme="dark"] .miniBtn.active{background:#704361;border-color:#ab6688}
+html[data-theme="dark"] .boardWrap{background:linear-gradient(145deg,#174e4a,#23605a 58%,#24576f);border-color:#564477;box-shadow:0 7px 0 #102f37}
+html[data-theme="dark"] .cell{background:rgba(12,36,43,.56);border-color:#39746d}
+html[data-theme="dark"] .cell.filled{background:linear-gradient(145deg,#453354,#352742);border-color:#67517d;box-shadow:0 3px 0 rgba(0,0,0,.28)}
+html[data-theme="dark"] .cell.item-garden{background:linear-gradient(145deg,#26503c,#32694b);border-color:#477b58}
+html[data-theme="dark"] .cell.item-bakery{background:linear-gradient(145deg,#5d452b,#75492e);border-color:#8e6842}
+html[data-theme="dark"] .cell.item-coffee{background:linear-gradient(145deg,#553735,#71434b);border-color:#86565c}
+html[data-theme="dark"] .cell.item-sea{background:linear-gradient(145deg,#214b63,#286a79);border-color:#428a98}
+html[data-theme="dark"] .cell.item-fruit{background:linear-gradient(145deg,#5a2e4a,#78364d);border-color:#944963}
+html[data-theme="dark"] .cell.producer{background:linear-gradient(145deg,#67502a,#77384e 55%,#493b75);border-color:#b18b66;box-shadow:0 3px 0 rgba(0,0,0,.3)}
+html[data-theme="dark"] .cell.selected{outline-color:#fff36d;box-shadow:0 0 0 2px #c9a8ff inset}
+html[data-theme="dark"] .cell .itemName{color:#fff0ff}
+html[data-theme="dark"] .levelTag{background:#665184;color:#fff0ff}
+html[data-theme="dark"] .producerBadge{background:#ffe5a0;color:#594064;box-shadow:0 1px 0 #241a35}
+html[data-theme="dark"] .producerTag{background:#5d4389;color:#fff0b7}
+html[data-theme="dark"] .chargeDots i{background:#5ed4ad}
+html[data-theme="dark"] .chargeDots i.off{background:#5c4a68}
+html[data-theme="dark"] .boardBottom p{color:#d2c3e2}
+html[data-theme="dark"] .produceNow{background:linear-gradient(145deg,#f178a5,#bf477f);box-shadow:0 3px 0 #803057}
+html[data-theme="dark"] .notice{background:linear-gradient(120deg,#3e2b52,#49313f);border-color:#614775;color:#ddd0eb}
+html[data-theme="dark"] .notice strong{color:#fff0ff}
+html[data-theme="dark"] .toolBtn{background:linear-gradient(145deg,#4a3a63,#342a50);border-color:#65517d;box-shadow:0 3px 0 #221a32;color:#f5eaff}
+html[data-theme="dark"] .toolBtn.gift{background:linear-gradient(145deg,#6a4c36,#5a3c49);border-color:#89604d;color:#fff0bf}
+html[data-theme="dark"] .saveLine{color:#c7b7db}
+html[data-theme="dark"] .saveDot{background:#5bd4a0;box-shadow:0 0 0 3px #5bd4a035}
+html[data-theme="dark"] .townHero{background:linear-gradient(145deg,#4a3971,#653d60 49%,#205b57);border-color:#665184;box-shadow:0 6px 0 #352547}
+html[data-theme="dark"] .townCaption{color:#e5d5f5}
+html[data-theme="dark"] .building,html[data-theme="dark"] .chainCard,html[data-theme="dark"] .settingsGroup{background:linear-gradient(145deg,#3b2d50,#30263f);border-color:#5e4776;box-shadow:0 4px 0 rgba(0,0,0,.22)}
+html[data-theme="dark"] .building:nth-child(4n+2){background:linear-gradient(145deg,#244845,#263a4b);border-color:#37655f}
+html[data-theme="dark"] .building:nth-child(4n+3){background:linear-gradient(145deg,#51402b,#49313e);border-color:#74523c}
+html[data-theme="dark"] .building:nth-child(4n){background:linear-gradient(145deg,#4c2e48,#432b4d);border-color:#704566}
+html[data-theme="dark"] .buildingLevel,html[data-theme="dark"] .settingsDesc{color:#cabbdf}
+html[data-theme="dark"] .upgrade{background:linear-gradient(145deg,#70d7b4,#3aa88d);color:#102f2a}
+html[data-theme="dark"] .chainSlot{background:#514066;color:#eee2ff}
+html[data-theme="dark"] .chainSlot.unlocked{background:linear-gradient(145deg,#68502e,#2e6954)}
+html[data-theme="dark"] .chainSlot small{color:#e4d5f7}
+html[data-theme="dark"] .settingBtn{background:linear-gradient(145deg,#397d6a,#2b6257);color:#f0fff9}
+html[data-theme="dark"] .settingBtn.alt{background:linear-gradient(145deg,#6f5833,#65404a);color:#fff1d0}
+html[data-theme="dark"] .settingBtn.danger{background:linear-gradient(145deg,#7b3b58,#5e304f);color:#ffe9f1}
+html[data-theme="dark"] .toast{background:linear-gradient(120deg,#21182f,#49335e);box-shadow:0 8px 25px #0008}
+html[data-theme="dark"] .modalBack{background:#080611bf}
+html[data-theme="dark"] .modal{background:linear-gradient(145deg,#2d233f,#392536);border-color:#59446f;box-shadow:0 12px 35px #0008}
+html[data-theme="dark"] .modal p{color:#c9b9dc}
+html[data-theme="dark"] .closeBtn{background:#514065;color:#f6eaff}
+html[data-theme="dark"] .themeChoice{background:#332740;border-color:#554064;color:#eadff7}
+html[data-theme="dark"] .themeChoice.active{background:linear-gradient(145deg,#604674,#3c5962);border-color:#b58bd6;color:#fff}
+.themePicker{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0 13px}
+.themeChoice{border:2px solid #e1d3f0;border-radius:14px;padding:12px 9px;background:linear-gradient(145deg,#fff1f8,#eee5ff);color:#4b385e;font-size:12px;font-weight:950;box-shadow:0 3px 0 rgba(77,54,100,.12)}
+.themeChoice.active{border-color:#9c75c4;background:linear-gradient(145deg,#d9c8ff,#f5bdd6);box-shadow:0 0 0 2px #9c75c433;color:#332348}
+.themeChoice span{display:block;font-size:21px;margin-bottom:4px}
+
+
+/* Merge-town additions: customer orders, reward chests and material-based restoration */
+.chestStrip{padding:11px 12px;margin:0 0 14px;border:2px solid #e8d7ff;border-radius:17px;background:linear-gradient(120deg,#fff0c5,#ffe0ed 48%,#d9f8ef);box-shadow:0 4px 0 rgba(108,70,129,.12)}
+.chestStripHead{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:11px;color:#63466f}.chestStripHead strong{font-size:10px;white-space:nowrap;background:#fff8;border-radius:8px;padding:4px 7px}
+.chestProgress{height:7px;margin:8px 0;background:#d5c2e5;border-radius:99px;overflow:hidden}.chestProgress div{height:100%;width:0;background:linear-gradient(90deg,#f5aa62,#ed81b0,#9a8af1);border-radius:99px;transition:width .25s}
+.chestStripFoot{display:flex;align-items:center;justify-content:space-between;gap:7px;font-size:9px;line-height:1.3;color:#756486}.chestStripFoot .miniBtn{flex:none;padding:7px 8px;max-width:48%}
+.orderArt{flex-direction:column;gap:0}.customerAvatar{font-size:27px;line-height:1}.orderArt small{position:static;margin-top:1px;font-size:7px;padding:1px 4px}.orderBody{overflow:hidden}.orderTitle{margin-bottom:4px}.orderItems{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px}.reqPill{display:inline-flex;align-items:center;gap:3px;border-radius:8px;padding:3px 5px;background:#ffffffa8;border:1px solid #ffffffd9;font-size:10px;font-weight:900;white-space:nowrap}.reqPill small{font-size:8px;opacity:.85}.customerLabel{font-size:9px;color:#947d9d;font-weight:900;margin-bottom:2px}
+.cell.chestCell{background:linear-gradient(145deg,#ffe9a7,#ffb6d5);border-color:#fff4cc;box-shadow:0 3px 0 #d69bbc}.cell.chestCell .itemName{color:#7a4568}.chestTag{background:#9b5ac4;color:#fff8d8;font-size:7px;font-weight:1000;line-height:1;border-radius:5px;padding:3px 4px;margin-top:3px}
+.materialsPanel{padding:12px;margin:12px 0 4px;border:2px solid #e8d7ff;border-radius:17px;background:linear-gradient(145deg,#fff3e4,#e5ddff);box-shadow:0 4px 0 rgba(82,57,123,.12)}.materialsHead{display:flex;justify-content:space-between;align-items:center;gap:7px;margin-bottom:9px}.materialsHead strong{font-size:12px}.materialsHead span{font-size:9px;color:#827092;font-weight:800}.materialsBar{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}.materialPill{display:flex;align-items:center;justify-content:center;gap:4px;min-width:0;padding:8px 3px;border-radius:11px;background:#ffffffba;border:1px solid #fff;font-size:10px;font-weight:1000;color:#584b6d}.materialPill .matIcon{font-size:16px}.materialPill .matCount{font-size:12px}.buildingHead{display:flex;align-items:center;justify-content:space-between;gap:7px}.buildingState{border-radius:7px;padding:4px 6px;font-size:8px;line-height:1.1;font-weight:1000;background:#ffffff9c;color:#826a8d;white-space:nowrap}.buildingIcon{display:inline-grid;place-items:center;min-height:38px;min-width:38px;font-size:31px}.buildingLevel{min-height:27px;line-height:1.35}.materialCost{margin-top:8px;font-size:10px;line-height:1.5;font-weight:950;color:#67537d}.repairRail{height:5px;margin-top:7px;background:#ffffffa8;border-radius:99px;overflow:hidden}.repairRail div{height:100%;background:linear-gradient(90deg,#ffb56e,#ed8bbd,#a3a2f4);border-radius:99px}
+html[data-theme="dark"] .chestStrip{background:linear-gradient(120deg,#5b452d,#5a3451 48%,#234d4b);border-color:#74557d;box-shadow:0 4px 0 #171126}.html[data-theme="dark"] .chestStripHead{color:#fff0d8}
+html[data-theme="dark"] .chestStripHead{color:#ffe9ff}html[data-theme="dark"] .chestStripHead strong{background:#241a35;color:#f7eaff}html[data-theme="dark"] .chestStripFoot{color:#d3c3e8}html[data-theme="dark"] .reqPill{background:#332842b8;border-color:#68517d;color:#fff1ff}html[data-theme="dark"] .customerLabel{color:#d2b9ea}html[data-theme="dark"] .cell.chestCell{background:linear-gradient(145deg,#765029,#8b396d);border-color:#d4a5a6}html[data-theme="dark"] .cell.chestCell .itemName{color:#fff0ff}html[data-theme="dark"] .materialsPanel{background:linear-gradient(145deg,#352846,#234644);border-color:#5e4776}html[data-theme="dark"] .materialsHead span{color:#c9b9df}html[data-theme="dark"] .materialPill{background:linear-gradient(145deg,#4c3a61,#2e454f);border-color:#64517b;color:#f6eaff}html[data-theme="dark"] .buildingState{background:#302440;color:#eedfff}html[data-theme="dark"] .materialCost{color:#d6c3ef}html[data-theme="dark"] .repairRail{background:#2b213d}
+@media(max-width:370px){.chestStrip{padding:9px}.chestStripFoot{align-items:flex-start;flex-direction:column}.chestStripFoot .miniBtn{max-width:none}.materialsPanel{padding:9px}.materialPill{font-size:9px}}
+
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="topline">
+    <div class="brandrow"><div class="logo">🌼</div><div><div class="brand">Papatya Koyu</div><div class="subtitle">BİRLEŞTİR · ÜRET · KASABANI KUR</div></div></div>
+    <div class="topActions"><button class="roundBtn" onclick="openSettings()" aria-label="Ayarlar">⚙️</button><button class="roundBtn" onclick="dailyGift()" aria-label="Günlük hediye">🎁</button></div>
+  </header>
+  <section class="stats">
+    <div class="stat"><span class="value" id="energyValue">⚡ 150/150</span><span class="label">Enerji · ücretsiz</span><div class="energyLine"><div class="energyFill" id="energyFill"></div></div></div>
+    <div class="stat"><span class="value" id="coinsValue">🪙 80</span><span class="label">Kasaba parası</span></div>
+    <div class="stat"><span class="value" id="levelValue">⭐ Seviye 1</span><span class="label">Kasaban</span></div>
+  </section>
+  <div class="levelBar"><span class="levelLabel" id="xpLabel">🌟 İlerleme</span><div class="xpRail"><div class="xpFill" id="xpFill"></div></div><span class="xpText" id="xpText">0/100 XP</span></div>
+
+  <nav class="nav" aria-label="Oyun bölümleri">
+    <button class="active" data-tab="boardPanel" onclick="showTab('boardPanel',this)">🧩 Birleştir</button>
+    <button data-tab="townPanel" onclick="showTab('townPanel',this)">🏡 Kasabam</button>
+    <button data-tab="collectionPanel" onclick="showTab('collectionPanel',this)">📖 Koleksiyon</button>
+  </nav>
+
+  <section class="panel active" id="boardPanel">
+    <div class="sectionHead"><h2>📬 Kasaba siparişleri</h2><span class="tinyNote">Teslim et, ödül kazan!</span></div>
+    <div class="orders" id="orders"></div>
+    <div class="chestStrip">
+      <div class="chestStripHead"><span>🎁 Her 3 siparişte bir sandık!</span><strong id="chestProgressText">0/3 sipariş</strong></div>
+      <div class="chestProgress"><div id="chestProgressFill"></div></div>
+      <div class="chestStripFoot"><span>Sandıklardan para, enerji ve onarım malzemeleri çıkar.</span><button class="miniBtn" id="storedChestButton" onclick="openStoredChest()">📦 Depodaki sandık: <b id="chestStoredCount">0</b></button></div>
+    </div>
+    <div class="boardTitleRow"><h2>🧺 Birleştirme tahtası</h2><div class="boardTools"><button class="miniBtn" id="moveButton" onclick="toggleMoveMode()">↔ Taşı</button><span class="tinyNote" id="boardCount">0/42</span></div></div>
+    <div class="boardWrap"><div class="board" id="board" aria-label="Eşya ve üretici kutularının bulunduğu tahta"></div></div>
+    <div class="boardBottom"><p id="boardHint">📦 Üretici kutusuna dokun, içinden eşya çıksın.<br>İki aynı eşyayı birleştirerek seviye atlat!</p><button class="produceNow" onclick="produceFromAny()" id="produceButton">🎁 Kutu aç</button></div>
+    <div class="notice"><span style="font-size:20px">💗</span><span><strong>Burada ödeme duvarı yok.</strong> Enerji kendiliğinden dolar; siparişler ve hediyelerle daha da kazanırsın. İlerlemen otomatik kaydedilir.</span></div>
+    <div class="bottomTools"><button class="toolBtn gift" onclick="dailyGift()">🎀 Günlük hediye</button><button class="toolBtn" onclick="openSettings()">💾 Kayıt / yedek</button></div>
+  </section>
+
+  <section class="panel" id="townPanel">
+    <div class="sectionHead"><h2>🌳 Yıkık kasabanı onar</h2><span class="tinyNote">Her onarımda güzelleşir</span></div>
+    <div class="townHero"><div class="townScene"><span class="townItem" id="townLeft">🌲</span><span class="townItem" id="townCenter">🏚️</span><span class="townItem" id="townRight">🪵</span></div><div class="townCaption" id="townCaption">Papatya Koyu seni bekliyor. İlk binanı onar!</div></div>
+    <div class="settingsGroup" style="margin-top:13px"><div class="settingsTitle" id="townLevelTitle">⭐ Kasaba seviyesi 1</div><div class="settingsDesc" id="townLevelDesc">Siparişleri tamamla, sandık aç ve kasabanı yeniden kur.</div><div class="xpRail"><div class="xpFill" id="townXpFill"></div></div></div>
+    <div class="materialsPanel"><div class="materialsHead"><strong>🧰 Onarım çantası</strong><span>Sandıklardan malzeme kazan</span></div><div class="materialsBar" id="materialsBar"></div></div>
+    <div class="sectionHead"><h2>🏚️ Onarılmayı bekleyen yerler</h2><span class="tinyNote">🪙 Para + malzeme gerekir</span></div>
+    <div class="buildingGrid" id="buildingGrid"></div>
+  </section>
+
+  <section class="panel" id="collectionPanel">
+    <div class="sectionHead"><h2>📚 Eşya defteri</h2><span class="tinyNote" id="collectionCount">0 keşif</span></div>
+    <div class="notice"><span style="font-size:20px">✨</span><span>Her birleştirmede yeni bir şey keşfedebilirsin. Kilitli olanları görmek için aynı türden eşyaları birleştir!</span></div>
+    <div class="collectionGrid" id="collectionGrid"></div>
+  </section>
+
+  <div class="saveLine"><span class="saveDot" id="saveDot"></span><span id="saveStatus">Otomatik kayıt açık</span></div>
+</div>
+
+<div class="modalBack" id="settingsModal" role="dialog" aria-modal="true" aria-label="Kayıt ve ayarlar"><div class="modal">
+  <div class="modalHead"><h2>⚙️ Oyun ve kayıt</h2><button class="closeBtn" onclick="closeSettings()" aria-label="Kapat">✕</button></div>
+  <p>Oyununu ve kayıtlarını buradan yönetebilirsin. Görünüm tercihin de bu tarayıcıda hatırlanır.</p>
+  <div class="settingsGroup themeSetting"><div class="settingsTitle">🎨 Görünümünü seç</div><div class="settingsDesc">Gündüz pastel tonlar mı, gece koyu tonlar mı?</div><div class="themePicker"><button class="themeChoice active" id="lightThemeButton" onclick="setTheme('light')"><span>🌷</span>Açık ton</button><button class="themeChoice" id="darkThemeButton" onclick="setTheme('dark')"><span>🌙</span>Koyu ton</button></div></div>
+  <button class="settingBtn" onclick="saveGame(true);toast('İlerlemen kaydedildi! 💾');closeSettings()">💾 Şimdi kaydet</button>
+  <button class="settingBtn alt" onclick="exportSave()">⬇️ Kayıt dosyasını indir</button>
+  <button class="settingBtn alt" onclick="document.getElementById('importInput').click()">⬆️ Yedekten geri yükle</button>
+  <input id="importInput" type="file" accept="application/json,.json" onchange="importSave(event)">
+  <button class="settingBtn danger" onclick="resetGame()">🧹 Oyunu sıfırla</button>
+  <p style="margin-bottom:0">Not: Safari'de aynı oyun adresini kullanmalısın. Tarayıcı verilerini silersen yerel kayıt da silinebilir; bu yüzden ara sıra yedek indirmen iyi olur.</p>
+</div></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+'use strict';
+const SAVE_KEY='papatyaKoyuSave_v3', LEGACY_SAVE_KEY='papatyaKoyuSave_v2';
+const SIZE=42, COLS=6, ENERGY_CAP=150, ENERGY_INTERVAL=4000;
+const CHAINS={
+  garden:{name:'Çiçekler',producer:'Çiçek kutusu',source:'📦',badge:'🌷',icons:['🌰','🌱','🌿','🌷','💐','🌺','🌸','🌼'],names:['Tohum','Filiz','Yaprak','Lale','Buket','Hibiskus','Kiraz çiçeği','Çiçek tacı']},
+  bakery:{name:'Fırın lezzetleri',producer:'Fırın kutusu',source:'📦',badge:'🥐',icons:['🌾','🥣','🫓','🥖','🥐','🧁','🎂','🍰'],names:['Buğday','Un','Hamur','Ekmek','Kruvasan','Kek','Pasta','Şef pastası']},
+  coffee:{name:'Kahve köşesi',producer:'Kahve kutusu',source:'📦',badge:'☕',icons:['🫘','☕','🥤','🧋','🍵','🍪','🍮','☕'],names:['Kahve çekirdeği','Espresso','Soğuk kahve','Bubble tea','Matcha','Kahveli kurabiye','Karamel puding','Özel kahve']},
+  sea:{name:'Sahil hazineleri',producer:'Sahil kutusu',source:'📦',badge:'🐚',icons:['🐚','🦪','🪸','🐠','🐟','🐬','🧜‍♀️','🏝️'],names:['Deniz kabuğu','İstiridye','Mercan','Tropik balık','Japon balığı','Yunus','Deniz kızı','Ada hazinesi']},
+  fruit:{name:'Meyve bahçesi',producer:'Meyve kutusu',source:'📦',badge:'🍓',icons:['🍃','🍋','🍊','🍉','🍓','🍒','🍇','🍍'],names:['Yaprak','Limon','Portakal','Karpuz','Çilek','Kiraz','Üzüm','Ananas']}
+};
+const TYPES=Object.keys(CHAINS);
+const MATERIALS={wood:{icon:'🪵',name:'Kereste'},brick:{icon:'🧱',name:'Tuğla'},paint:{icon:'🎨',name:'Boya'},rope:{icon:'🪢',name:'Halat'}};
+const CUSTOMERS=[{name:'Ada',avatar:'👩🏻‍🌾'},{name:'Mert',avatar:'🧑🏻‍🍳'},{name:'Lila',avatar:'👩🏼‍🎨'},{name:'Ege',avatar:'🧑🏻‍🌊'},{name:'Mina',avatar:'👩🏻‍🍰'},{name:'Deniz',avatar:'🧑🏼‍🌿'},{name:'Lale',avatar:'👩🏼‍🌸'}];
+const BUILDINGS=[
+  {id:'bakery',name:'Sahil fırını',icon:'🥐',ruin:'🏚️',stages:[{coins:55,needs:{wood:2,brick:1}},{coins:105,needs:{wood:2,brick:2,paint:1}},{coins:165,needs:{brick:2,paint:2}}],desc:'Mis gibi ekmek kokusu yeniden yayılsın.',icons:['🏚️','🧱','🥐','🏠']},
+  {id:'garden',name:'Çiçek bahçesi',icon:'🌷',ruin:'🪨',stages:[{coins:45,needs:{wood:1,paint:1}},{coins:85,needs:{wood:2,paint:1}},{coins:135,needs:{wood:2,paint:2}}],desc:'Kuruyan bahçe yeniden çiçeklensin.',icons:['🪨','🌱','🌷','🌳']},
+  {id:'cafe',name:'Minik kafe',icon:'☕',ruin:'🏚️',stages:[{coins:65,needs:{wood:1,brick:2}},{coins:120,needs:{wood:2,brick:2,paint:1}},{coins:180,needs:{brick:3,paint:2}}],desc:'Kasabalılar burada buluşsun.',icons:['🏚️','🧱','☕','🏡']},
+  {id:'pier',name:'Ahşap iskele',icon:'🛶',ruin:'🪵',stages:[{coins:70,needs:{wood:3,rope:1}},{coins:125,needs:{wood:3,rope:2}},{coins:185,needs:{wood:4,rope:2,paint:1}}],desc:'Sahile yeniden tekneler yanaşsın.',icons:['🪵','🪚','🛶','⛵']}
+];
+function freshState(){return {version:3,board:Array(SIZE).fill(null),coins:80,energy:ENERGY_CAP,energyAt:Date.now(),xp:0,level:1,stars:0,merges:0,itemsMade:0,ordersDone:0,giftDay:'',giftCount:0,orders:[],discovered:{},buildings:{bakery:0,garden:0,cafe:0,pier:0},materials:{wood:2,brick:1,paint:1,rope:1},chestInventory:0,selected:null,moveMode:false,lastSaved:0};}
+let state=freshState(),toastTimer=null,lastSaveWrite=0;
+const $=id=>document.getElementById(id);
+const THEME_KEY='papatyaKoyuTheme';
+function applyTheme(theme){const selected=theme==='dark'?'dark':'light';document.documentElement.dataset.theme=selected;const meta=document.querySelector('meta[name="theme-color"]');if(meta)meta.content=selected==='dark'?'#21182f':'#a99bdd';const l=$('lightThemeButton'),d=$('darkThemeButton');if(l&&d){l.classList.toggle('active',selected==='light');d.classList.toggle('active',selected==='dark');}}
+function setTheme(theme){const selected=theme==='dark'?'dark':'light';applyTheme(selected);try{localStorage.setItem(THEME_KEY,selected);}catch(e){}toast(selected==='dark'?'Koyu tema açıldı 🌙':'Açık tema açıldı 🌷');}
+function item(type,level=1){return {kind:'item',type,level};}
+function producer(type,charges=12){return {kind:'producer',type,charges,maxCharges:12};}
+function randomType(except=null){const choices=TYPES.filter(t=>t!==except);return choices[Math.floor(Math.random()*choices.length)];}
+function randomInt(min,max){return Math.floor(Math.random()*(max-min+1))+min;}
+function iconFor(obj){if(!obj)return '';if(obj.kind==='producer')return CHAINS[obj.type].source;if(obj.kind==='chest')return '🎁';return CHAINS[obj.type]?.icons[Math.min(obj.level-1,CHAINS[obj.type].icons.length-1)]||'✨';}
+function nameFor(obj){if(!obj)return '';if(obj.kind==='producer')return CHAINS[obj.type].producer;if(obj.kind==='chest')return 'Sürpriz sandık';return CHAINS[obj.type]?.names[Math.min(obj.level-1,CHAINS[obj.type].names.length-1)]||'Nadir eşya';}
+function maxEnergySync(){const now=Date.now();if(state.energy>=ENERGY_CAP){state.energy=ENERGY_CAP;state.energyAt=now;return false;}const ticks=Math.floor((now-state.energyAt)/ENERGY_INTERVAL);if(ticks<=0)return false;const before=state.energy;state.energy=Math.min(ENERGY_CAP,state.energy+ticks);state.energyAt+=ticks*ENERGY_INTERVAL;if(state.energy>=ENERGY_CAP)state.energyAt=now;return before!==state.energy;}
+function initialBoard(){const seeds=[[0,'producer','garden'],[5,'producer','bakery'],[12,'producer','coffee'],[17,'producer','fruit'],[24,'producer','sea'],[2,'garden',1],[3,'garden',1],[7,'bakery',1],[8,'bakery',1],[13,'coffee',1],[14,'coffee',1],[19,'fruit',1],[20,'fruit',1],[26,'sea',1],[27,'sea',1],[31,'garden',1],[32,'bakery',1]];seeds.forEach(([i,t,a])=>{state.board[i]=t==='producer'?producer(a):item(t,a);});state.orders=[newOrder(true),newOrder(true),newOrder(true)];state.board.forEach(markDiscovered);}
+function newOrder(intro=false){const firstType=randomType();const requirements=[];const easy=intro||state.ordersDone===0;const level=easy?(Math.random()<.76?1:2):randomInt(1,Math.min(4,2+Math.floor(state.ordersDone/4)));requirements.push({type:firstType,level});if(!easy&&Math.random()<.48){const secondType=randomType(firstType);requirements.push({type:secondType,level:randomInt(1,Math.min(3,2+Math.floor(state.ordersDone/5)))});}const score=requirements.reduce((n,r)=>n+r.level,0);const customer=CUSTOMERS[Math.floor(Math.random()*CUSTOMERS.length)];return {id:Date.now().toString(36)+Math.random().toString(36).slice(2,7),customer:customer.name,avatar:customer.avatar,requirements,reward:20+score*15+(requirements.length===2?14:0),xp:13+score*8+(requirements.length===2?9:0)};}
+function normalizeOrder(o){if(!o||typeof o!=='object')return newOrder(true);let reqs=Array.isArray(o.requirements)?o.requirements.map(r=>({type:TYPES.includes(r.type)?r.type:'garden',level:Math.max(1,Math.min(8,Number(r.level)||1))})):([{type:TYPES.includes(o.type)?o.type:'garden',level:Math.max(1,Math.min(8,Number(o.level)||1))}]);const c=CUSTOMERS.find(x=>x.name===o.customer)||CUSTOMERS[Math.floor(Math.random()*CUSTOMERS.length)];const score=reqs.reduce((n,r)=>n+r.level,0);return {id:o.id||Math.random().toString(36).slice(2),customer:c.name,avatar:o.avatar||c.avatar,requirements:reqs,reward:Number(o.reward)||20+score*15,xp:Number(o.xp)||13+score*8};}
+function stateFromData(data){const base=freshState();const next={...base,...data,version:3,materials:{...base.materials,...(data.materials||{})},buildings:{...base.buildings,...(data.buildings||{})},chestInventory:Math.max(0,Number(data.chestInventory)||0),selected:null,moveMode:false};next.board=(Array.isArray(data.board)?data.board:base.board).slice(0,SIZE);while(next.board.length<SIZE)next.board.push(null);next.board=next.board.map(o=>{if(!o)return null;if(o.kind==='chest')return {kind:'chest',quality:1};if(o.kind==='producer'&&CHAINS[o.type])return {...o,kind:'producer',charges:Math.max(0,Math.min(12,Number(o.charges??12))),maxCharges:12};if(o.kind==='item'&&CHAINS[o.type]&&Number.isInteger(o.level)&&o.level>=1)return {...o};return null;});next.orders=Array.isArray(data.orders)?data.orders.slice(0,3).map(normalizeOrder):[];const previousState=state;state=next;while(next.orders.length<3)next.orders.push(newOrder(Number(next.ordersDone||0)===0));state=previousState;next.materials=Object.fromEntries(Object.keys(MATERIALS).map(k=>[k,Math.max(0,Number(next.materials[k])||0)]));next.buildings=Object.fromEntries(BUILDINGS.map(b=>[b.id,Math.max(0,Math.min(b.stages.length,Number(next.buildings[b.id])||0))]));return next;}
+function loadGame(){try{let raw=localStorage.getItem(SAVE_KEY);if(!raw)raw=localStorage.getItem(LEGACY_SAVE_KEY);if(!raw)return false;const data=JSON.parse(raw);if(!data||!Array.isArray(data.board)||data.board.length!==SIZE||![2,3].includes(data.version))return false;state=stateFromData(data);maxEnergySync();state.board.forEach(markDiscovered);return true;}catch(e){return false;}}
+function saveGame(manual=false){try{maxEnergySync();const snap={...state,version:3,selected:null,moveMode:false,lastSaved:Date.now()};localStorage.setItem(SAVE_KEY,JSON.stringify(snap));state.lastSaved=snap.lastSaved;lastSaveWrite=Date.now();if($('saveStatus'))$('saveStatus').textContent='Otomatik kaydedildi · '+new Date().toLocaleTimeString('tr-TR',{hour:'2-digit',minute:'2-digit'});if($('saveDot'))$('saveDot').classList.remove('warn');if(manual)toast('İlerlemen bu tarayıcıya kaydedildi! 💾');return true;}catch(e){if($('saveStatus'))$('saveStatus').textContent='Yerel kayıt başarısız · yedek indir';if($('saveDot'))$('saveDot').classList.add('warn');return false;}}
+function toast(msg){const el=$('toast');if(!el)return;el.textContent=msg;el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('show'),2300);}
+function showTab(id,btn){document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('active',p.id===id));document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b===btn));if(id==='townPanel')renderTown();if(id==='collectionPanel')renderCollection();}
+function renderStats(){maxEnergySync();$('energyValue').textContent=`⚡ ${state.energy}/${ENERGY_CAP}`;$('energyFill').style.width=(state.energy/ENERGY_CAP*100)+'%';$('coinsValue').textContent='🪙 '+state.coins;$('levelValue').textContent='⭐ Seviye '+state.level;const goal=state.level*100;$('xpLabel').textContent='🌟 Seviye '+state.level;$('xpFill').style.width=(state.xp/goal*100)+'%';$('xpText').textContent=`${state.xp}/${goal} XP`;}
+function requirementsFor(order){return Array.isArray(order.requirements)&&order.requirements.length?order.requirements:[{type:order.type||'garden',level:order.level||1}];}
+function findOrderSlots(order){const reqs=requirementsFor(order).slice().sort((a,b)=>b.level-a.level);const used=[];for(const req of reqs){const candidates=state.board.map((o,i)=>({o,i})).filter(x=>x.o&&x.o.kind==='item'&&x.o.type===req.type&&x.o.level>=req.level&&!used.includes(x.i)).sort((a,b)=>a.o.level-b.o.level);if(!candidates.length)return null;used.push(candidates[0].i);}return used;}
+function renderOrders(){const el=$('orders');el.innerHTML='';state.orders.forEach((o,i)=>{const reqs=requirementsFor(o),slots=findOrderSlots(o),found=!!slots;const card=document.createElement('div');card.className='order';const reqHtml=reqs.map(r=>{const info=CHAINS[r.type],idx=Math.min(r.level-1,info.icons.length-1);return `<span class="reqPill">${info.icons[idx]} ${info.names[idx]} <small>Sv ${r.level}+</small></span>`;}).join('');card.innerHTML=`<div class="orderArt"><span class="customerAvatar">${o.avatar||'🧑🏻‍🌾'}</span><small>${reqs.length===1?'1 eşya':'2 eşya'}</small></div><div class="orderBody"><div class="customerLabel">${o.customer||'Kasabalı'}'nın isteği</div><div class="orderTitle">Sipariş #${i+1}</div><div class="orderItems">${reqHtml}</div><div class="orderReward">🪙 +${o.reward} &nbsp;·&nbsp; 🌟 +${o.xp} XP &nbsp;·&nbsp; ⚡ +10</div><div class="orderProgress"><div style="width:${found?'100%':Math.min(85,15+reqs.filter(r=>state.board.some(x=>x&&x.kind==='item'&&x.type===r.type&&x.level>=r.level)).length/reqs.length*70)+'%'}"></div></div></div><button class="deliver" ${found?'':'disabled'} onclick="deliverOrder(${i})">${found?'Teslim et':'Hazırla'}</button>`;el.appendChild(card);});const progress=state.ordersDone%3;$('chestProgressText').textContent=`${progress}/3 sipariş`;$('chestProgressFill').style.width=(progress/3*100)+'%';$('chestStoredCount').textContent=state.chestInventory;$('storedChestButton').disabled=state.chestInventory<1;$('storedChestButton').style.opacity=state.chestInventory<1?'.65':'1';}
+function renderBoard(){const el=$('board');el.innerHTML='';let occupied=0;state.board.forEach((obj,i)=>{const cell=document.createElement('button');let cls='cell';if(obj){occupied++;cls+=' filled';if(obj.kind==='producer')cls+=' producer';else if(obj.kind==='chest')cls+=' chestCell';else cls+=' item-'+obj.type;}if(state.selected===i)cls+=' selected';cell.className=cls;cell.setAttribute('aria-label',obj?nameFor(obj):'Boş alan');if(!obj){cell.innerHTML='<span class="emptyPlus">＋</span>';}else if(obj.kind==='producer'){const charges=Math.max(0,obj.charges||0);cell.innerHTML=`<span class="producerIcon">${obj.source||'📦'}</span><span class="producerBadge">${CHAINS[obj.type].badge}</span><span class="itemName">${CHAINS[obj.type].producer}</span><span class="producerTag">KUTU</span><span class="chargeDots">${Array.from({length:obj.maxCharges||12},(_,n)=>`<i class="${n<charges?'':'off'}"></i>`).join('')}</span>`;}else if(obj.kind==='chest'){cell.innerHTML='<span class="producerIcon">🎁</span><span class="itemName">Sürpriz sandık</span><span class="chestTag">AÇ</span>';}else{cell.innerHTML=`<span class="emoji">${iconFor(obj)}</span><span class="itemName">${nameFor(obj)}</span><span class="levelTag">SV ${obj.level}</span>`;}cell.addEventListener('click',()=>tapCell(i));el.appendChild(cell);});$('boardCount').textContent=occupied+'/'+SIZE;$('moveButton').classList.toggle('active',state.moveMode);$('moveButton').textContent=state.moveMode?'✓ Taşıma açık':'↔ Taşı';$('boardHint').innerHTML=state.moveMode?'↔ Taşıma modu açık.<br>Bir eşyaya, sonra boş yere dokun.':'📦 Temalı kutulara dokun, içinden eşya çıksın.<br>İki aynı eşyayı birleştir; müşteriye teslim et!';$('produceButton').disabled=state.energy<=0||state.board.every(o=>o!==null);}
+function render(){renderStats();renderOrders();renderBoard();}
+function firstEmpty(){return state.board.findIndex(o=>o===null);}
+function gainXP(amount){state.xp+=amount;while(state.xp>=state.level*100){state.xp-=state.level*100;state.level++;state.stars++;toast(`Yeni kasaba seviyesi! ⭐ Seviye ${state.level}`);}}
+function markDiscovered(obj){if(!obj||obj.kind!=='item')return;state.discovered[obj.type]=state.discovered[obj.type]||{};state.discovered[obj.type][obj.level]=true;}
+function tapCell(i){const obj=state.board[i];if(state.moveMode){moveTap(i);return;}if(obj&&obj.kind==='chest'){openChestAt(i);return;}if(obj&&obj.kind==='producer'){state.selected=null;produceFrom(i);return;}if(state.selected===null){if(!obj){toast('Önce bir eşya seç veya kutuya dokun ✨');return;}state.selected=i;renderBoard();return;}if(state.selected===i){state.selected=null;renderBoard();return;}const from=state.selected,a=state.board[from],b=obj;if(!a){state.selected=null;renderBoard();return;}if(!b){state.board[i]=a;state.board[from]=null;state.selected=null;saveGame();render();return;}if(a.kind==='item'&&b.kind==='item'&&a.type===b.type&&a.level===b.level){if(a.level>=CHAINS[a.type].icons.length){state.coins+=8;state.board[from]=null;state.selected=null;gainXP(4);saveGame();render();toast('En üst seviye! +8 🪙');return;}state.board[i]=item(a.type,a.level+1);state.board[from]=null;state.selected=null;state.merges++;state.coins+=3;gainXP(5);markDiscovered(state.board[i]);saveGame();render();toast(`${nameFor(state.board[i])}! Birleştirme şahane ✨`);return;}state.selected=i;renderBoard();toast('Aynı tür ve seviyedeki iki eşyayı birleştir 💗');}
+function moveTap(i){const obj=state.board[i];if(state.selected===null){if(!obj){toast('Taşımak için eşya, kutu veya sandık seç.');return;}state.selected=i;renderBoard();return;}if(state.selected===i){state.selected=null;renderBoard();return;}const from=state.selected,a=state.board[from],b=obj;if(!a){state.selected=null;renderBoard();return;}if(!b){state.board[i]=a;state.board[from]=null;state.selected=null;saveGame();render();toast('Taşıdın!');return;}if(a.kind==='item'&&b.kind==='item'&&a.type===b.type&&a.level===b.level){state.moveMode=false;tapCell(i);return;}state.selected=i;renderBoard();toast('Boş bir alana taşıyabilir veya aynı eşyaları birleştirebilirsin.');}
+function toggleMoveMode(){state.moveMode=!state.moveMode;state.selected=null;renderBoard();toast(state.moveMode?'Taşıma modu açık ↔':'Kutu açma modu açık 📦');}
+function produceFrom(i){const source=state.board[i];if(!source||source.kind!=='producer')return;if((source.charges||0)<=0){toast('Bu kutu dinleniyor; yükleri birazdan yenilenecek!');return;}if(state.energy<=0){toast('Enerjin birazdan ücretsiz yenilenecek ⚡');return;}const empty=firstEmpty();if(empty<0){toast('Tahta dolu! Önce birleştirerek yer aç.');return;}state.energy--;source.charges--;state.itemsMade++;source._rechargeAt=source._rechargeAt||Date.now();state.board[empty]=item(source.type,1);markDiscovered(state.board[empty]);gainXP(1);saveGame();render();toast(`${CHAINS[source.type].names[0]} kutudan çıktı! 🎁`);}
+function produceFromAny(){const i=state.board.findIndex(o=>o&&o.kind==='producer'&&(o.charges||0)>0);if(i<0){toast('Şimdilik açılabilecek dolu bir kutu yok.');return;}produceFrom(i);}
+function awardChest(){const empty=firstEmpty();if(empty>=0)state.board[empty]={kind:'chest',quality:1};else state.chestInventory++;toast('Harika! Sipariş serisi ödülü: Sürpriz sandık kazandın! 🎁');}
+function grantChestRewards(dropIndex=-1){const coinGain=randomInt(24,48),energyGain=randomInt(12,24),amount=randomInt(2,4);state.coins+=coinGain;state.energy=Math.min(ENERGY_CAP,state.energy+energyGain);const gained={};for(let n=0;n<amount;n++){const keys=Object.keys(MATERIALS);const key=keys[randomInt(0,keys.length-1)];state.materials[key]=(state.materials[key]||0)+1;gained[key]=(gained[key]||0)+1;}gainXP(12);if(dropIndex>=0&&state.board[dropIndex]===null&&Math.random()<.78){const drop=item(randomType(),1);state.board[dropIndex]=drop;markDiscovered(drop);}saveGame();render();if($('townPanel').classList.contains('active'))renderTown();const mats=Object.entries(gained).map(([k,v])=>`${MATERIALS[k].icon}×${v}`).join(' ');toast(`Sandık açıldı! +${coinGain} 🪙 · +${energyGain} ⚡ · ${mats}`);}
+function openChestAt(i){if(!state.board[i]||state.board[i].kind!=='chest')return;state.board[i]=null;grantChestRewards(i);}
+function openStoredChest(){if(state.chestInventory<=0){toast('Depoda açılacak sandık yok. Siparişlerle yeni sandık kazan!');return;}state.chestInventory--;grantChestRewards(-1);}
+function deliverOrder(i){const o=state.orders[i];if(!o)return;const slots=findOrderSlots(o);if(!slots){toast('İstenen eşyaları birleştirerek hazırla.');return;}slots.forEach(slot=>state.board[slot]=null);state.coins+=o.reward;state.stars++;state.ordersDone++;state.energy=Math.min(ENERGY_CAP,state.energy+10);gainXP(o.xp);const chestEarned=state.ordersDone%3===0;state.orders[i]=newOrder(false);if(chestEarned)awardChest();saveGame();render();if($('townPanel').classList.contains('active'))renderTown();toast(`Sipariş teslim edildi! +${o.reward} 🪙 · +10 ⚡${chestEarned?' · Sandık kazandın! 🎁':''}`);}
+function dailyGift(){const today=new Date().toLocaleDateString('sv-SE');if(state.giftDay===today){toast('Bugünkü hediyeni aldın bile, yarın yine gel! 🎀');return;}state.giftDay=today;state.giftCount++;state.coins+=35;state.energy=Math.min(ENERGY_CAP,state.energy+25);const empty=firstEmpty();if(empty>=0){const t=randomType();state.board[empty]=item(t,1);markDiscovered(state.board[empty]);}if(state.giftCount%3===0)awardChest();gainXP(12);saveGame();render();toast('Günlük hediye: +35 🪙 · +25 ⚡ · sürpriz eşya! 🎀');}
+function canAffordBuilding(b,stage){if(!stage)return false;if(state.coins<stage.coins)return false;return Object.entries(stage.needs).every(([key,n])=>(state.materials[key]||0)>=n);}
+function needsText(needs){return Object.entries(needs).map(([key,n])=>`${MATERIALS[key].icon} ${n}`).join(' · ');}
+function renderTown(){const lvl=state.level,restored=BUILDINGS.reduce((n,b)=>n+(state.buildings[b.id]||0),0);$('townCaption').textContent=restored===0?'Papatya Koyu seni bekliyor. İlk binanı onar!':restored<3?'Kasaba yavaş yavaş eski güzelliğine kavuşuyor!':restored<8?'Dükkânlar açılıyor, sokaklar canlanıyor! ✨':'Papatya Koyu yeniden ışıl ışıl! Herkes buraya geliyor! 🌸';$('townCenter').textContent=state.buildings.bakery>=2?'🏠':state.buildings.cafe>=2?'☕':'🏚️';$('townLeft').textContent=state.buildings.garden>=2?'🌳':state.buildings.garden>=1?'🌱':'🪨';$('townRight').textContent=state.buildings.pier>=2?'⛵':state.buildings.pier>=1?'🪚':'🪵';$('townLevelTitle').textContent=`⭐ Kasaba seviyesi ${lvl} · ${restored}/12 onarım aşaması`;$('townLevelDesc').textContent=`${state.stars} yıldızın var. Siparişlerden para kazan, sandıkları aç ve binaları yeniden kur.`;$('townXpFill').style.width=(state.xp/(lvl*100)*100)+'%';$('materialsBar').innerHTML=Object.entries(MATERIALS).map(([key,m])=>`<div class="materialPill" title="${m.name}"><span class="matIcon">${m.icon}</span><span class="matCount">${state.materials[key]||0}</span></div>`).join('');const el=$('buildingGrid');el.innerHTML='';BUILDINGS.forEach(b=>{const lv=state.buildings[b.id]||0,stage=b.stages[lv],done=!stage,can=canAffordBuilding(b,stage),card=document.createElement('div');card.className='building';const icon=b.icons[Math.min(lv,b.icons.length-1)];const stateLabel=done?'YENİLENDİ':lv===0?'YIKIK':`ONARIM ${lv}/3`;const body=done?'Burası tamamlandı! Kasabanın keyfini çıkar.':lv===0?b.desc:'Bir sonraki onarımla daha da güzelleşecek.';const costs=done?'Tüm onarım aşamaları tamamlandı':`🪙 ${stage.coins} <br>${needsText(stage.needs)}`;const progress=lv/3*100;card.innerHTML=`<div class="buildingHead"><span class="buildingIcon">${icon}</span><span class="buildingState">${stateLabel}</span></div><div class="buildingName">${b.name}</div><div class="buildingLevel">${body}</div><div class="materialCost">${costs}</div><div class="repairRail"><div style="width:${progress}%"></div></div><button class="upgrade" ${can?'':'disabled'} onclick="restoreBuilding('${b.id}')">${done?'✓ Tamamlandı':lv===0?'İlk onarımı yap':'Sonraki aşamayı onar'}${done?'':` · 🪙 ${stage.coins}`}</button>`;el.appendChild(card);});}
+function restoreBuilding(id){const b=BUILDINGS.find(x=>x.id===id);if(!b)return;const lv=state.buildings[id]||0,stage=b.stages[lv];if(!stage){toast('Bu bina tamamen yenilendi! 🏡');return;}if(state.coins<stage.coins){toast(`Biraz daha para gerekiyor: 🪙 ${stage.coins}`);return;}for(const [key,n] of Object.entries(stage.needs)){if((state.materials[key]||0)<n){toast(`Onarım için ${MATERIALS[key].icon} ${MATERIALS[key].name} gerekiyor (${n} adet). Sandık kazan!`);return;}}state.coins-=stage.coins;for(const [key,n] of Object.entries(stage.needs))state.materials[key]-=n;state.buildings[id]=lv+1;state.stars+=2;gainXP(18+lv*6);saveGame();renderStats();renderTown();toast(`${b.name} onarıldı! Kasaban biraz daha güzelleşti 🏡✨`);}
+function renderCollection(){let found=0;const el=$('collectionGrid');el.innerHTML='';TYPES.forEach(type=>{const info=CHAINS[type],card=document.createElement('div');card.className='chainCard';const slots=info.icons.map((icon,i)=>{const unlocked=!!(state.discovered[type]&&state.discovered[type][i+1]);if(unlocked)found++;return `<div class="chainSlot ${unlocked?'unlocked':''}" title="${unlocked?info.names[i]:'Henüz keşfedilmedi'}">${unlocked?icon:'❔'}<small>${i+1}</small></div>`;}).join('');card.innerHTML=`<div class="chainHeader"><span style="font-size:20px">${info.badge}</span><span>${info.name}</span></div><div class="chainEmojis">${slots}</div>`;el.appendChild(card);});$('collectionCount').textContent=found+'/40 keşif';}
+function openSettings(){$('settingsModal').classList.add('show');}
+function closeSettings(){$('settingsModal').classList.remove('show');}
+function exportSave(){try{maxEnergySync();const blob=new Blob([JSON.stringify({...state,version:3,selected:null,moveMode:false},null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='papatya-koyu-yedek.json';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1500);toast('Kayıt yedeğin indiriliyor! ⬇️');}catch(e){toast('Yedek oluşturulamadı; tekrar dene.');}}
+function importSave(event){const file=event.target.files&&event.target.files[0];if(!file)return;const reader=new FileReader();reader.onload=()=>{try{const data=JSON.parse(reader.result);if(!data||![2,3].includes(data.version)||!Array.isArray(data.board)||data.board.length!==SIZE)throw new Error('invalid');if(!confirm('Bu yedek mevcut ilerlemenin yerine yüklensin mi?'))return;state=stateFromData(data);maxEnergySync();state.board.forEach(markDiscovered);saveGame();render();renderTown();closeSettings();toast('Yedeğin geri yüklendi! 💾');}catch(e){toast('Bu dosya geçerli bir Papatya Koyu yedeği değil.');}event.target.value='';};reader.readAsText(file);}
+function resetGame(){if(!confirm('Oyunu sıfırlamak istiyor musun? Mevcut ilerleme silinecek. İstersen önce yedek indir.'))return;try{localStorage.removeItem(SAVE_KEY);localStorage.removeItem(LEGACY_SAVE_KEY);}catch(e){}state=freshState();initialBoard();saveGame();render();renderTown();closeSettings();toast('Yeni bir kasaba macerası başladı! 🌼');}
+function tick(){const changed=maxEnergySync();let sourceChanged=false;state.board.forEach(o=>{if(o&&o.kind==='producer'&&(o.charges||0)<(o.maxCharges||12)){o._rechargeAt=o._rechargeAt||Date.now();const n=Math.floor((Date.now()-o._rechargeAt)/6000);if(n>0){o.charges=Math.min(o.maxCharges||12,o.charges+n);o._rechargeAt+=n*6000;sourceChanged=true;}}else if(o&&o.kind==='producer'&&o._rechargeAt){delete o._rechargeAt;}});renderStats();if(changed||sourceChanged)renderBoard();if(Date.now()-lastSaveWrite>20000)saveGame();}
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')saveGame();else{maxEnergySync();render();}});window.addEventListener('pagehide',()=>saveGame());window.addEventListener('beforeunload',()=>saveGame());$('settingsModal').addEventListener('click',e=>{if(e.target===$('settingsModal'))closeSettings();});
+let savedTheme='light';try{savedTheme=localStorage.getItem(THEME_KEY)||'light';}catch(e){}applyTheme(savedTheme);
+if(!loadGame()){state=freshState();initialBoard();saveGame();}else{state.orders=state.orders.slice(0,3);while(state.orders.length<3)state.orders.push(newOrder(state.ordersDone===0));state.board.forEach(markDiscovered);saveGame();}render();if($('townPanel').classList.contains('active'))renderTown();setInterval(tick,1000);
+</script>
+</body>
+</html>
